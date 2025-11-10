@@ -1,0 +1,13 @@
+[Unit]
+Description=Send PC Metrics to Home Assistant via MQTT
+After=network.target
+
+[Service]
+Type=simple
+User=tuoutente
+WorkingDirectory=/home/tuoutente/pc_metrics_ha
+ExecStart=/home/tuoutente/pc_metrics_ha/venv/bin/python /home/tuoutente/pc_metrics_ha/pc_to_ha.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

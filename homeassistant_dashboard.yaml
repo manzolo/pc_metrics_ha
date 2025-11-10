@@ -1,0 +1,181 @@
+# Home Assistant Lovelace Dashboard for PC Metrics
+#
+# To use this dashboard:
+# 1. Go to Home Assistant > Settings > Dashboards
+# 2. Click "+ ADD DASHBOARD"
+# 3. Choose "New dashboard from scratch"
+# 4. Name it "PC Metrics"
+# 5. Click the three dots menu > "Edit Dashboard" > "Raw configuration editor"
+# 6. Paste this YAML content
+# 7. Click "Save"
+#
+# Remember to replace "pc-hostname" in homeassistant_sensors.yaml with your actual hostname
+
+title: PC Metrics
+badges: []
+cards:
+  # === CPU & TEMPERATURES ===
+  - type: entities
+    title: 🔥 CPU & GPU Temperatures
+    show_header_toggle: false
+    entities:
+      - entity: sensor.pc_cpu_temperature
+        name: CPU Temperature
+        icon: mdi:cpu-64-bit
+      - entity: sensor.pc_gpu_temperature
+        name: GPU Temperature
+        icon: mdi:gpu
+
+  # === GPU DETAILS ===
+  - type: entities
+    title: 🎮 GPU Performance
+    show_header_toggle: false
+    entities:
+      - entity: sensor.pc_gpu_load
+        name: GPU Load
+        icon: mdi:gauge
+      - entity: sensor.pc_gpu_memory_percentage
+        name: GPU Memory Usage
+        icon: mdi:memory
+      - entity: sensor.pc_gpu_memory_used
+        name: GPU Memory Used
+        icon: mdi:chip
+
+  # === MEMORY ===
+  - type: entities
+    title: 💾 System Memory (RAM)
+    show_header_toggle: false
+    entities:
+      - entity: sensor.pc_ram_usage
+        name: RAM Usage
+        icon: mdi:memory
+      - entity: sensor.pc_ram_used
+        name: RAM Used
+        icon: mdi:memory
+      - entity: sensor.pc_ram_available
+        name: RAM Available
+        icon: mdi:memory
+
+  # === STORAGE - ROOT ===
+  - type: entities
+    title: 💿 Root Partition (/)
+    show_header_toggle: false
+    entities:
+      - entity: sensor.pc_disk_root_usage
+        name: Usage
+        icon: mdi:harddisk
+      - entity: sensor.pc_disk_root_used
+        name: Used Space
+        icon: mdi:database
+      - entity: sensor.pc_disk_root_free
+        name: Free Space
+        icon: mdi:database-outline
+
+  # === STORAGE - HOME ===
+  - type: entities
+    title: 🏠 Home Partition (/home)
+    show_header_toggle: false
+    entities:
+      - entity: sensor.pc_disk_home_usage
+        name: Usage
+        icon: mdi:harddisk
+      - entity: sensor.pc_disk_home_used
+        name: Used Space
+        icon: mdi:database
+      - entity: sensor.pc_disk_home_free
+        name: Free Space
+        icon: mdi:database-outline
+
+  # === DISK TEMPERATURES ===
+  - type: entities
+    title: 🌡️ Disk Temperatures
+    show_header_toggle: false
+    entities:
+      - entity: sensor.pc_disk_nvme0_temperature
+        name: NVMe0 (Root)
+        icon: mdi:thermometer
+      - entity: sensor.pc_disk_nvme1_temperature
+        name: NVMe1 (Home)
+        icon: mdi:thermometer
+      - entity: sensor.pc_disk_sda_temperature
+        name: SDA Temperature
+        icon: mdi:thermometer
+      - entity: sensor.pc_disk_sdb_temperature
+        name: SDB Temperature
+        icon: mdi:thermometer
+
+  # === UNMOUNTED DISKS ===
+  - type: entities
+    title: 📦 Additional Disks (Unmounted)
+    show_header_toggle: false
+    entities:
+      - entity: sensor.pc_disk_sda_total_size
+        name: SDA Total Size
+        icon: mdi:harddisk
+      - entity: sensor.pc_disk_sdb_total_size
+        name: SDB Total Size
+        icon: mdi:harddisk
+
+  # === TEMPERATURE HISTORY ===
+  - type: history-graph
+    title: 📊 Temperature History (24h)
+    hours_to_show: 24
+    entities:
+      - entity: sensor.pc_cpu_temperature
+        name: CPU
+      - entity: sensor.pc_gpu_temperature
+        name: GPU
+      - entity: sensor.pc_disk_nvme0_temperature
+        name: NVMe0
+      - entity: sensor.pc_disk_nvme1_temperature
+        name: NVMe1
+
+  # === USAGE HISTORY ===
+  - type: history-graph
+    title: 📈 Usage History (24h)
+    hours_to_show: 24
+    entities:
+      - entity: sensor.pc_ram_usage
+        name: RAM
+      - entity: sensor.pc_gpu_load
+        name: GPU Load
+      - entity: sensor.pc_disk_root_usage
+        name: Root Disk
+      - entity: sensor.pc_disk_home_usage
+        name: Home Disk
+
+  # === GAUGES (OPTIONAL - VISUAL) ===
+  - type: horizontal-stack
+    cards:
+      - type: gauge
+        entity: sensor.pc_cpu_temperature
+        name: CPU
+        min: 0
+        max: 100
+        severity:
+          green: 0
+          yellow: 60
+          red: 80
+        needle: true
+
+      - type: gauge
+        entity: sensor.pc_gpu_temperature
+        name: GPU
+        min: 0
+        max: 100
+        severity:
+          green: 0
+          yellow: 70
+          red: 85
+        needle: true
+
+      - type: gauge
+        entity: sensor.pc_ram_usage
+        name: RAM
+        min: 0
+        max: 100
+        severity:
+          green: 0
+          yellow: 70
+          red: 90
+        needle: true

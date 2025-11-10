@@ -1,0 +1,151 @@
+# Home Assistant MQTT Sensor Configuration
+# Add this to your configuration.yaml under 'mqtt:' section
+#
+# mqtt:
+#   sensor: !include homeassistant_sensors.yaml
+#
+# OR add directly to configuration.yaml under mqtt: sensor:
+#
+# Replace "pc-hostname" with your actual PC name from the metrics
+
+# CPU Temperature
+- name: "PC CPU Temperature"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "°C"
+  value_template: "{{ value_json.cpu_temp_c }}"
+  device_class: temperature
+  state_class: measurement
+
+# GPU 0 - Temperature
+- name: "PC GPU Temperature"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "°C"
+  value_template: "{{ value_json.gpu0_temp_c }}"
+  device_class: temperature
+  state_class: measurement
+
+# GPU 0 - Load
+- name: "PC GPU Load"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "%"
+  value_template: "{{ value_json.gpu0_load_percent }}"
+  icon: mdi:gpu
+
+# GPU 0 - Memory Usage
+- name: "PC GPU Memory Used"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "MB"
+  value_template: "{{ value_json.gpu0_memory_used_mb }}"
+  icon: mdi:memory
+
+# GPU 0 - Memory Percentage
+- name: "PC GPU Memory Percentage"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "%"
+  value_template: "{{ value_json.gpu0_memory_percent }}"
+  icon: mdi:memory
+
+# RAM - Percentage
+- name: "PC RAM Usage"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "%"
+  value_template: "{{ value_json.ram_percent }}"
+  icon: mdi:memory
+
+# RAM - Used GB
+- name: "PC RAM Used"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "GB"
+  value_template: "{{ value_json.ram_used_gb }}"
+  icon: mdi:memory
+
+# RAM - Available GB
+- name: "PC RAM Available"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "GB"
+  value_template: "{{ value_json.ram_available_gb }}"
+  icon: mdi:memory
+
+# Disk NVMe0n1p2 (Root /) - Percentage
+- name: "PC Disk Root Usage"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "%"
+  value_template: "{{ value_json.disk_nvme0n1p2_percent }}"
+  icon: mdi:harddisk
+
+# Disk NVMe0n1p2 (Root) - Used GB
+- name: "PC Disk Root Used"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "GB"
+  value_template: "{{ value_json.disk_nvme0n1p2_used_gb }}"
+  icon: mdi:harddisk
+
+# Disk NVMe0n1p2 (Root) - Free GB
+- name: "PC Disk Root Free"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "GB"
+  value_template: "{{ value_json.disk_nvme0n1p2_free_gb }}"
+  icon: mdi:harddisk
+
+# Disk NVMe1n1p1 (Home) - Percentage
+- name: "PC Disk Home Usage"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "%"
+  value_template: "{{ value_json.disk_nvme1n1p1_percent }}"
+  icon: mdi:harddisk
+
+# Disk NVMe1n1p1 (Home) - Used GB
+- name: "PC Disk Home Used"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "GB"
+  value_template: "{{ value_json.disk_nvme1n1p1_used_gb }}"
+  icon: mdi:harddisk
+
+# Disk NVMe1n1p1 (Home) - Free GB
+- name: "PC Disk Home Free"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "GB"
+  value_template: "{{ value_json.disk_nvme1n1p1_free_gb }}"
+  icon: mdi:harddisk
+
+# Disk Temperatures
+- name: "PC Disk NVMe0 Temperature"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "°C"
+  value_template: "{{ value_json.disk_nvme0n1_temp_c }}"
+  device_class: temperature
+  state_class: measurement
+
+- name: "PC Disk NVMe1 Temperature"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "°C"
+  value_template: "{{ value_json.disk_nvme1n1_temp_c }}"
+  device_class: temperature
+  state_class: measurement
+
+- name: "PC Disk SDA Temperature"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "°C"
+  value_template: "{{ value_json.disk_sda_temp_c }}"
+  device_class: temperature
+  state_class: measurement
+
+- name: "PC Disk SDB Temperature"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "°C"
+  value_template: "{{ value_json.disk_sdb_temp_c }}"
+  device_class: temperature
+  state_class: measurement
+
+# Unmounted Disk Sizes (for reference)
+- name: "PC Disk SDA Total Size"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "GB"
+  value_template: "{{ value_json.disk_sda_total_size_gb }}"
+  icon: mdi:harddisk
+
+- name: "PC Disk SDB Total Size"
+  state_topic: "pc/pc-hostname/metrics"
+  unit_of_measurement: "GB"
+  value_template: "{{ value_json.disk_sdb_total_size_gb }}"
+  icon: mdi:harddisk
