@@ -4,7 +4,6 @@ Monitor your Linux PC hardware metrics in Home Assistant via MQTT. Get real-time
 
 ![Home Assistant Dashboard](https://img.shields.io/badge/Home%20Assistant-Dashboard-blue)
 ![Python](https://img.shields.io/badge/Python-3.8+-green)
-![License](https://img.shields.io/badge/License-MIT-yellow)
 
 ## Features
 
@@ -282,17 +281,6 @@ Contributions welcome! Please:
 4. Test thoroughly
 5. Submit a pull request
 
-## License
-
-MIT License - See LICENSE file for details
-
-## Support
-
-- **Issues**: [GitHub Issues](https://github.com/yourusername/pc_metrics_ha/issues)
-- **Documentation**: See [CLAUDE.md](CLAUDE.md) for developer docs
-- **Home Assistant Setup**: See [HOME_ASSISTANT_SETUP.md](HOME_ASSISTANT_SETUP.md)
-- **Disk Temperature Setup**: See [DISK_TEMPERATURE_SETUP.md](DISK_TEMPERATURE_SETUP.md)
-
 ## Credits
 
 Built with:
@@ -301,19 +289,6 @@ Built with:
 - [GPUtil](https://github.com/anderskm/gputil) - GPU monitoring
 - [python-dotenv](https://github.com/theskumar/python-dotenv) - Environment management
 
-## Screenshots
-
-<details>
-<summary>Home Assistant Dashboard Example</summary>
-
-Your dashboard will include:
-- Temperature gauges (CPU, GPU, disks)
-- Storage usage cards with visual bars
-- RAM and GPU performance metrics
-- Historical graphs (24h)
-- All metrics in clean entities cards
-
-</details>
 
 ---
 
