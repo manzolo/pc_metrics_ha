@@ -27,6 +27,7 @@ Monitor your Linux PC hardware metrics in Home Assistant via MQTT. Get real-time
 - **Comprehensive Logging** - Detailed error messages and debugging
 
 ## Screenshots
+<img width="1664" height="810" alt="immagine" src="https://github.com/user-attachments/assets/d689f877-9031-4c8e-88fc-b2a6d2459f72" />
 
 Your Home Assistant dashboard will show:
 - Real-time temperature gauges with color coding
@@ -49,7 +50,7 @@ Your Home Assistant dashboard will show:
 ### 1. Install
 
 ```bash
-git clone https://github.com/yourusername/pc_metrics_ha.git
+git clone https://github.com/manzolo/pc_metrics_ha.git
 cd pc_metrics_ha
 make install
 ```
