@@ -32,9 +32,22 @@ install:
 	@$(PIP) install --upgrade pip setuptools
 	@$(PIP) install psutil paho-mqtt GPUtil python-dotenv
 	@echo "Installing system dependencies..."
-	@sudo apt-get update && sudo apt-get install -y lm-sensors smartmontools
+	@if command -v apt-get >/dev/null 2>&1; then \
+		sudo apt-get update && sudo apt-get install -y lm-sensors smartmontools; \
+	elif command -v pacman >/dev/null 2>&1; then \
+		sudo pacman -Sy --noconfirm lm_sensors smartmontools; \
+	elif command -v dnf >/dev/null 2>&1; then \
+		sudo dnf install -y lm_sensors smartmontools; \
+	elif command -v yum >/dev/null 2>&1; then \
+		sudo yum install -y lm_sensors smartmontools; \
+	elif command -v zypper >/dev/null 2>&1; then \
+		sudo zypper install -y sensors smartmontools; \
+	else \
+		echo "Warning: package manager not detected. Install lm-sensors and smartmontools manually."; \
+	fi
 	@echo "Configuring passwordless sudo for smartctl..."
-	@echo "$(CURRENT_USER) ALL=(ALL) NOPASSWD: /usr/sbin/smartctl" | sudo tee /etc/sudoers.d/pc-metrics-smartctl > /dev/null
+	@SMARTCTL_PATH=$$(command -v smartctl 2>/dev/null || echo "/usr/sbin/smartctl"); \
+	echo "$(CURRENT_USER) ALL=(ALL) NOPASSWD: $$SMARTCTL_PATH" | sudo tee /etc/sudoers.d/pc-metrics-smartctl > /dev/null
 	@sudo chmod 0440 /etc/sudoers.d/pc-metrics-smartctl
 	@echo "Copying application files..."
 	@cp pc_to_ha.py $(INSTALL_DIR)/
@@ -46,7 +59,7 @@ install:
 		echo ".env file already exists, skipping..."; \
 	fi
 	@echo "Setting up systemd service..."
-	@sed 's|tuoutente|$(CURRENT_USER)|g; s|/home/tuoutente|$(HOME)|g' pc_metrics.service > /tmp/$(SERVICE_NAME)
+	@sed 's|/home/tuoutente|$(HOME)|g; s|tuoutente|$(CURRENT_USER)|g' pc_metrics.service > /tmp/$(SERVICE_NAME)
 	@sudo cp /tmp/$(SERVICE_NAME) $(SERVICE_FILE)
 	@sudo systemctl daemon-reload
 	@sudo systemctl enable $(SERVICE_NAME)
